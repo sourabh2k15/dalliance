@@ -315,9 +315,7 @@ BigWigView.prototype.fetchFeatures = function(filter, blocksToFetch, callback) {
                             if (thisB.bwg.uncompressBufSize > 0) {
                                 data = jszlib_inflate_buffer(result, offset + 2, fb.size - 2);
                             } else {
-                                var tmp = new Uint8Array(fb.size);    // FIXME is this really the best we can do?
-                                arrayCopy(new Uint8Array(result, offset, fb.size), 0, tmp, 0, fb.size);
-                                data = tmp.buffer;
+                               data = result.slice(offset,offset+fb.size);
                             }
                             fb.data = data;
                             
